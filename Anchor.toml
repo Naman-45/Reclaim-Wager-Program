@@ -2,17 +2,17 @@
 anchor_version = "0.29.0"
 
 [features]
-seeds = false
+resolution = true
 skip-lint = false
 
 [programs.devnet]
-reclaim = "2NRByeqyVqXf4LByQP8aTAnWToK9zCwV8JSBZTW2gQAq"
+reclaim = "CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "Devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

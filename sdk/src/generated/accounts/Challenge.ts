@@ -10,65 +10,65 @@ import * as beet from '@metaplex-foundation/beet'
 import * as beetSolana from '@metaplex-foundation/beet-solana'
 
 /**
- * Arguments used to create {@link EpochConfig}
+ * Arguments used to create {@link Challenge}
  * @category Accounts
  * @category generated
  */
-export type EpochConfigArgs = {
-  bump: number
-  createKey: web3.PublicKey
-  deployer: web3.PublicKey
-  epochDurationSeconds: beet.bignum
-  epochIndex: number
-  epochs: web3.PublicKey[]
+export type ChallengeArgs = {
+  creator: web3.PublicKey
+  opponent: beet.COption<web3.PublicKey>
+  wagerAmount: beet.bignum
+  resultSettled: boolean
+  winner: beet.COption<web3.PublicKey>
+  challengeBump: number
 }
 
-export const epochConfigDiscriminator = [190, 66, 87, 197, 214, 153, 144, 193]
+export const challengeDiscriminator = [119, 250, 161, 121, 119, 81, 22, 208]
 /**
- * Holds the data for the {@link EpochConfig} Account and provides de/serialization
+ * Holds the data for the {@link Challenge} Account and provides de/serialization
  * functionality for that data
  *
  * @category Accounts
  * @category generated
  */
-export class EpochConfig implements EpochConfigArgs {
+export class Challenge implements ChallengeArgs {
   private constructor(
-    readonly bump: number,
-    readonly createKey: web3.PublicKey,
-    readonly deployer: web3.PublicKey,
-    readonly epochDurationSeconds: beet.bignum,
-    readonly epochIndex: number,
-    readonly epochs: web3.PublicKey[]
+    readonly creator: web3.PublicKey,
+    readonly opponent: beet.COption<web3.PublicKey>,
+    readonly wagerAmount: beet.bignum,
+    readonly resultSettled: boolean,
+    readonly winner: beet.COption<web3.PublicKey>,
+    readonly challengeBump: number
   ) {}
 
   /**
-   * Creates a {@link EpochConfig} instance from the provided args.
+   * Creates a {@link Challenge} instance from the provided args.
    */
-  static fromArgs(args: EpochConfigArgs) {
-    return new EpochConfig(
-      args.bump,
-      args.createKey,
-      args.deployer,
-      args.epochDurationSeconds,
-      args.epochIndex,
-      args.epochs
+  static fromArgs(args: ChallengeArgs) {
+    return new Challenge(
+      args.creator,
+      args.opponent,
+      args.wagerAmount,
+      args.resultSettled,
+      args.winner,
+      args.challengeBump
     )
   }
 
   /**
-   * Deserializes the {@link EpochConfig} from the data of the provided {@link web3.AccountInfo}.
+   * Deserializes the {@link Challenge} from the data of the provided {@link web3.AccountInfo}.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
   static fromAccountInfo(
     accountInfo: web3.AccountInfo<Buffer>,
     offset = 0
-  ): [EpochConfig, number] {
-    return EpochConfig.deserialize(accountInfo.data, offset)
+  ): [Challenge, number] {
+    return Challenge.deserialize(accountInfo.data, offset)
   }
 
   /**
    * Retrieves the account info from the provided address and deserializes
-   * the {@link EpochConfig} from its data.
+   * the {@link Challenge} from its data.
    *
    * @throws Error if no account info is found at the address or if deserialization fails
    */
@@ -76,15 +76,15 @@ export class EpochConfig implements EpochConfigArgs {
     connection: web3.Connection,
     address: web3.PublicKey,
     commitmentOrConfig?: web3.Commitment | web3.GetAccountInfoConfig
-  ): Promise<EpochConfig> {
+  ): Promise<Challenge> {
     const accountInfo = await connection.getAccountInfo(
       address,
       commitmentOrConfig
     )
     if (accountInfo == null) {
-      throw new Error(`Unable to find EpochConfig account at ${address}`)
+      throw new Error(`Unable to find Challenge account at ${address}`)
     }
-    return EpochConfig.fromAccountInfo(accountInfo, 0)[0]
+    return Challenge.fromAccountInfo(accountInfo, 0)[0]
   }
 
   /**
@@ -98,73 +98,72 @@ export class EpochConfig implements EpochConfigArgs {
       'CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn'
     )
   ) {
-    return beetSolana.GpaBuilder.fromStruct(programId, epochConfigBeet)
+    return beetSolana.GpaBuilder.fromStruct(programId, challengeBeet)
   }
 
   /**
-   * Deserializes the {@link EpochConfig} from the provided data Buffer.
+   * Deserializes the {@link Challenge} from the provided data Buffer.
    * @returns a tuple of the account data and the offset up to which the buffer was read to obtain it.
    */
-  static deserialize(buf: Buffer, offset = 0): [EpochConfig, number] {
-    return epochConfigBeet.deserialize(buf, offset)
+  static deserialize(buf: Buffer, offset = 0): [Challenge, number] {
+    return challengeBeet.deserialize(buf, offset)
   }
 
   /**
-   * Serializes the {@link EpochConfig} into a Buffer.
+   * Serializes the {@link Challenge} into a Buffer.
    * @returns a tuple of the created Buffer and the offset up to which the buffer was written to store it.
    */
   serialize(): [Buffer, number] {
-    return epochConfigBeet.serialize({
-      accountDiscriminator: epochConfigDiscriminator,
+    return challengeBeet.serialize({
+      accountDiscriminator: challengeDiscriminator,
       ...this,
     })
   }
 
   /**
    * Returns the byteSize of a {@link Buffer} holding the serialized data of
-   * {@link EpochConfig} for the provided args.
+   * {@link Challenge} for the provided args.
    *
    * @param args need to be provided since the byte size for this account
    * depends on them
    */
-  static byteSize(args: EpochConfigArgs) {
-    const instance = EpochConfig.fromArgs(args)
-    return epochConfigBeet.toFixedFromValue({
-      accountDiscriminator: epochConfigDiscriminator,
+  static byteSize(args: ChallengeArgs) {
+    const instance = Challenge.fromArgs(args)
+    return challengeBeet.toFixedFromValue({
+      accountDiscriminator: challengeDiscriminator,
       ...instance,
     }).byteSize
   }
 
   /**
    * Fetches the minimum balance needed to exempt an account holding
-   * {@link EpochConfig} data from rent
+   * {@link Challenge} data from rent
    *
    * @param args need to be provided since the byte size for this account
    * depends on them
    * @param connection used to retrieve the rent exemption information
    */
   static async getMinimumBalanceForRentExemption(
-    args: EpochConfigArgs,
+    args: ChallengeArgs,
     connection: web3.Connection,
     commitment?: web3.Commitment
   ): Promise<number> {
     return connection.getMinimumBalanceForRentExemption(
-      EpochConfig.byteSize(args),
+      Challenge.byteSize(args),
       commitment
     )
   }
 
   /**
-   * Returns a readable version of {@link EpochConfig} properties
+   * Returns a readable version of {@link Challenge} properties
    * and can be used to convert to JSON and/or logging
    */
   pretty() {
     return {
-      bump: this.bump,
-      createKey: this.createKey.toBase58(),
-      deployer: this.deployer.toBase58(),
-      epochDurationSeconds: (() => {
-        const x = <{ toNumber: () => number }>this.epochDurationSeconds
+      creator: this.creator.toBase58(),
+      opponent: this.opponent,
+      wagerAmount: (() => {
+        const x = <{ toNumber: () => number }>this.wagerAmount
         if (typeof x.toNumber === 'function') {
           try {
             return x.toNumber()
@@ -174,8 +173,9 @@ export class EpochConfig implements EpochConfigArgs {
         }
         return x
       })(),
-      epochIndex: this.epochIndex,
-      epochs: this.epochs,
+      resultSettled: this.resultSettled,
+      winner: this.winner,
+      challengeBump: this.challengeBump,
     }
   }
 }
@@ -184,21 +184,21 @@ export class EpochConfig implements EpochConfigArgs {
  * @category Accounts
  * @category generated
  */
-export const epochConfigBeet = new beet.FixableBeetStruct<
-  EpochConfig,
-  EpochConfigArgs & {
+export const challengeBeet = new beet.FixableBeetStruct<
+  Challenge,
+  ChallengeArgs & {
     accountDiscriminator: number[] /* size: 8 */
   }
 >(
   [
     ['accountDiscriminator', beet.uniformFixedSizeArray(beet.u8, 8)],
-    ['bump', beet.u8],
-    ['createKey', beetSolana.publicKey],
-    ['deployer', beetSolana.publicKey],
-    ['epochDurationSeconds', beet.u64],
-    ['epochIndex', beet.u32],
-    ['epochs', beet.array(beetSolana.publicKey)],
+    ['creator', beetSolana.publicKey],
+    ['opponent', beet.coption(beetSolana.publicKey)],
+    ['wagerAmount', beet.u64],
+    ['resultSettled', beet.bool],
+    ['winner', beet.coption(beetSolana.publicKey)],
+    ['challengeBump', beet.u8],
   ],
-  EpochConfig.fromArgs,
-  'EpochConfig'
+  Challenge.fromArgs,
+  'Challenge'
 )

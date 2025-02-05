@@ -1,5 +1,5 @@
 use crate::constants::*;
-use crate::errors::*;
+use crate::error::ReclaimError;
 use crate::state::*;
 
 use anchor_lang::prelude::*;

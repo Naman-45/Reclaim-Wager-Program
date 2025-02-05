@@ -25,7 +25,7 @@ export function createRPCConnection(rpcUrl: string) {
 
 // This address will be updated when running `yarn setup`
 export function getTestProgramId() {
-  return new PublicKey("2NRByeqyVqXf4LByQP8aTAnWToK9zCwV8JSBZTW2gQAq");
+  return new PublicKey("CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn");
 }
 
 export function createComputeLimitAndFeeIx(units: number, feeLamports: number) {

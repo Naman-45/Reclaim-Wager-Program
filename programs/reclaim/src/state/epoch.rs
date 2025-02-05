@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 use crate::constants::*;
-use crate::errors::*;
+use crate::error::ReclaimError;
 use crate::utils::is_valid_ethereum_address;
 
 #[derive(AnchorSerialize, AnchorDeserialize, PartialEq, Eq, Debug, Clone)]

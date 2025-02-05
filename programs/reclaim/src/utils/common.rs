@@ -1,4 +1,4 @@
-use crate::errors::*;
+use crate::error::reclaim::ReclaimError;
 use crate::state::*;
 
 use anchor_lang::prelude::*;

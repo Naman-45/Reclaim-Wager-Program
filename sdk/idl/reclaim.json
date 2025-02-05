@@ -194,9 +194,227 @@
           }
         }
       ]
+    },
+    {
+      "name": "createChallenge",
+      "accounts": [
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "challenge",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "creatorTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "programTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "challengeId",
+          "type": "string"
+        },
+        {
+          "name": "wagerAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "joinChallenge",
+      "accounts": [
+        {
+          "name": "opponent",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "challenge",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "opponentTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "programTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "challengeId",
+          "type": "string"
+        },
+        {
+          "name": "wagerAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "settleWager",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "opponent",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "challenge",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "opponentTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creatorTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "programTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "winner",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
+          "name": "challengeId",
+          "type": "string"
+        }
+      ]
     }
   ],
   "accounts": [
+    {
+      "name": "Challenge",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
+            "name": "opponent",
+            "type": {
+              "option": "publicKey"
+            }
+          },
+          {
+            "name": "wagerAmount",
+            "type": "u64"
+          },
+          {
+            "name": "resultSettled",
+            "type": "bool"
+          },
+          {
+            "name": "winner",
+            "type": {
+              "option": "publicKey"
+            }
+          },
+          {
+            "name": "challengeBump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
     {
       "name": "Dapp",
       "type": {
@@ -225,40 +443,6 @@
           {
             "name": "group",
             "type": "publicKey"
-          }
-        ]
-      }
-    },
-    {
-      "name": "EpochConfig",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "bump",
-            "type": "u8"
-          },
-          {
-            "name": "createKey",
-            "type": "publicKey"
-          },
-          {
-            "name": "deployer",
-            "type": "publicKey"
-          },
-          {
-            "name": "epochDurationSeconds",
-            "type": "u64"
-          },
-          {
-            "name": "epochIndex",
-            "type": "u32"
-          },
-          {
-            "name": "epochs",
-            "type": {
-              "vec": "publicKey"
-            }
           }
         ]
       }
@@ -298,6 +482,40 @@
               "vec": {
                 "defined": "Witness"
               }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EpochConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "createKey",
+            "type": "publicKey"
+          },
+          {
+            "name": "deployer",
+            "type": "publicKey"
+          },
+          {
+            "name": "epochDurationSeconds",
+            "type": "u64"
+          },
+          {
+            "name": "epochIndex",
+            "type": "u32"
+          },
+          {
+            "name": "epochs",
+            "type": {
+              "vec": "publicKey"
             }
           }
         ]
@@ -440,26 +658,30 @@
       }
     },
     {
-      "name": "SignedClaim",
+      "name": "ClaimData",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "claimData",
+            "name": "identifier",
             "type": {
-              "defined": "ClaimData"
+              "array": [
+                "u8",
+                32
+              ]
             }
           },
           {
-            "name": "signatures",
-            "type": {
-              "vec": {
-                "array": [
-                  "u8",
-                  65
-                ]
-              }
-            }
+            "name": "owner",
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "type": "u32"
+          },
+          {
+            "name": "epochIndex",
+            "type": "u32"
           }
         ]
       }
@@ -489,30 +711,26 @@
       }
     },
     {
-      "name": "ClaimData",
+      "name": "SignedClaim",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "identifier",
+            "name": "claimData",
             "type": {
-              "array": [
-                "u8",
-                32
-              ]
+              "defined": "ClaimData"
             }
           },
           {
-            "name": "owner",
-            "type": "string"
-          },
-          {
-            "name": "timestamp",
-            "type": "u32"
-          },
-          {
-            "name": "epochIndex",
-            "type": "u32"
+            "name": "signatures",
+            "type": {
+              "vec": {
+                "array": [
+                  "u8",
+                  65
+                ]
+              }
+            }
           }
         ]
       }
@@ -564,6 +782,16 @@
       ]
     },
     {
+      "name": "CreateDappEvent",
+      "fields": [
+        {
+          "name": "id",
+          "type": "u32",
+          "index": false
+        }
+      ]
+    },
+    {
       "name": "CreateGroupEvent",
       "fields": [
         {
@@ -579,16 +807,6 @@
         {
           "name": "provider",
           "type": "string",
-          "index": false
-        }
-      ]
-    },
-    {
-      "name": "CreateDappEvent",
-      "fields": [
-        {
-          "name": "id",
-          "type": "u32",
           "index": false
         }
       ]
@@ -672,7 +890,7 @@
     }
   ],
   "metadata": {
-    "address": "9Hk1t2edUC4kufMjkid2mt4m29cPwyaPhwNhAfrmEoG7",
+    "address": "CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn",
     "origin": "anchor",
     "binaryVersion": "0.29.0",
     "libVersion": "0.29.0"

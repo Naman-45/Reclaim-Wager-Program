@@ -7,7 +7,7 @@ const binaryInstallDir = path.join(__dirname, ".crates");
 module.exports = {
   idlGenerator: "anchor",
   programName: "reclaim",
-  programId: "2NRByeqyVqXf4LByQP8aTAnWToK9zCwV8JSBZTW2gQAq",
+  programId: "CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn",
   idlDir,
   sdkDir,
   binaryInstallDir,

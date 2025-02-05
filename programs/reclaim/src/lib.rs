@@ -4,14 +4,14 @@
 use anchor_lang::prelude::*;
 use instructions::*;
 
+declare_id!("CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn");
+
 pub mod constants;
-pub mod errors;
+pub mod error;
 pub mod events;
 pub mod instructions;
 pub mod state;
 pub mod utils;
-
-declare_id!("2NRByeqyVqXf4LByQP8aTAnWToK9zCwV8JSBZTW2gQAq");
 
 #[program]
 pub mod reclaim {
@@ -39,11 +39,26 @@ pub mod reclaim {
         group::create(ctx, args)
     }
 
-    pub fn verify_proof(ctx: Context<VerifyProof>, args: VerifyProofArgs) -> Result<()> {
-        group::verify_proof(ctx, args)
-    }
+    // pub fn verify_proof(ctx: Context<VerifyProof>, args: VerifyProofArgs) -> Result<()> {
+    //     group::verify_proof(ctx, args)
+    // }
 
     pub fn create_dapp(ctx: Context<CreateDapp>, args: CreateDappArgs) -> Result<()> {
         dapp::create(ctx, args)
+    }
+
+    pub fn create_challenge(ctx: Context<Initialize>, challenge_id: String, wager_amount:u64) -> Result<()> {
+        wager::initialize::init_challenge(ctx, challenge_id, wager_amount)?;
+        Ok(())
+    }
+
+    pub fn join_challenge(ctx: Context<JoinChallenge>, challenge_id: String, wager_amount:u64) -> Result<()> {
+        wager::join::join_challenge(ctx, challenge_id, wager_amount)?;
+        Ok(())
+    }
+
+    pub fn settle_wager(ctx: Context<Settle>, challenge_id: String, args: VerifyProofArgs) -> Result<()> {
+        wager::settle::settle_challenge_and_verify_proof(ctx, challenge_id, args)?;
+        Ok(())
     }
 }

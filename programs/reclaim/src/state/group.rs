@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 use crate::constants::*;
-use crate::errors::*;
+use crate::error::ReclaimError;
 
 #[account]
 pub struct Group {

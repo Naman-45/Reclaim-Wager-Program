@@ -66,7 +66,7 @@ export const createGroupInstructionDiscriminator = [
 export function createCreateGroupInstruction(
   accounts: CreateGroupInstructionAccounts,
   args: CreateGroupInstructionArgs,
-  programId = new web3.PublicKey('9Hk1t2edUC4kufMjkid2mt4m29cPwyaPhwNhAfrmEoG7')
+  programId = new web3.PublicKey('CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn')
 ) {
   const [data] = createGroupStruct.serialize({
     instructionDiscriminator: createGroupInstructionDiscriminator,

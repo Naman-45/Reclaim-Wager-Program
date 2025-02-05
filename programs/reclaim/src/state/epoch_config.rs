@@ -1,4 +1,4 @@
-use crate::{constants::MAX_EPOCHS, errors::ReclaimError};
+use crate::{constants::MAX_EPOCHS, error::ReclaimError};
 use anchor_lang::prelude::*;
 
 #[account]

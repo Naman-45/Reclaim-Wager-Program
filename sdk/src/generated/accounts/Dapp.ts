@@ -95,7 +95,7 @@ export class Dapp implements DappArgs {
    */
   static gpaBuilder(
     programId: web3.PublicKey = new web3.PublicKey(
-      '9Hk1t2edUC4kufMjkid2mt4m29cPwyaPhwNhAfrmEoG7'
+      'CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn'
     )
   ) {
     return beetSolana.GpaBuilder.fromStruct(programId, dappBeet)
