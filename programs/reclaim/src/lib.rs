@@ -1,10 +1,11 @@
 #![allow(unknown_lints)]
 #![allow(ambiguous_glob_reexports)]
+#![allow(unexpected_cfgs)]
 
 use anchor_lang::prelude::*;
 use instructions::*;
 
-declare_id!("CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn");
+declare_id!("EopRkEakcNd3kC7SZZKXqAHFx1ysXwcAsDW2ABhKAGpN");
 
 pub mod constants;
 pub mod error;
@@ -43,9 +44,9 @@ pub mod reclaim {
     //     group::verify_proof(ctx, args)
     // }
 
-    pub fn create_dapp(ctx: Context<CreateDapp>, args: CreateDappArgs) -> Result<()> {
-        dapp::create(ctx, args)
-    }
+    // pub fn create_dapp(ctx: Context<CreateDapp>, args: CreateDappArgs) -> Result<()> {
+    //     dapp::create(ctx, args)
+    // }
 
     pub fn create_challenge(ctx: Context<Initialize>, challenge_id: String, wager_amount:u64) -> Result<()> {
         wager::initialize::init_challenge(ctx, challenge_id, wager_amount)?;

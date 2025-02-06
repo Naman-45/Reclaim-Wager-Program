@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{token_interface::{ Mint, TokenAccount, transfer_checked, TransferChecked, TokenInterface }, associated_token::AssociatedToken};
 
-use crate::state::Challenge;
+use crate::{constants::SEED_CHALLENGE, state::Challenge};
 
 #[derive(Accounts)]
 #[instruction(challenge_id: String)]
@@ -13,7 +13,7 @@ pub struct Initialize<'info> {
         init,
         payer = creator,
         space = 8 + Challenge::INIT_SPACE,
-        seeds = [b"challenge", challenge_id.as_bytes()],
+        seeds = [SEED_CHALLENGE, challenge_id.as_bytes()],
         bump
     )]
     pub challenge: Account<'info, Challenge>,
@@ -29,7 +29,6 @@ pub struct Initialize<'info> {
     )]
     pub creator_token_account : InterfaceAccount<'info, TokenAccount>,
    
-    /// CHECK: program's escrow account
     #[account(
         init,
         payer = creator,
@@ -59,7 +58,7 @@ pub fn init_challenge(ctx: Context<Initialize>, _challenge_id: String, wager_amo
             from: accounts.creator_token_account.to_account_info(),
             mint: accounts.token_mint.to_account_info(),
             to: accounts.program_token_account.to_account_info(),
-            authority: accounts.creator_token_account.to_account_info()
+            authority: accounts.creator.to_account_info()
         };
 
 

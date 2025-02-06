@@ -12,340 +12,185 @@ const createErrorFromCodeLookup: Map<number, () => ErrorWithCode> = new Map()
 const createErrorFromNameLookup: Map<string, () => ErrorWithCode> = new Map()
 
 /**
- * InvalidEpochDuration: 'Invalid Epoch Duration'
+ * ChallengeAlreadyJoined: 'The challenge has already been joined.'
  *
  * @category Errors
  * @category generated
  */
-export class InvalidEpochDurationError extends Error {
+export class ChallengeAlreadyJoinedError extends Error {
   readonly code: number = 0x1770
-  readonly name: string = 'InvalidEpochDuration'
+  readonly name: string = 'ChallengeAlreadyJoined'
   constructor() {
-    super('Invalid Epoch Duration')
+    super('The challenge has already been joined.')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidEpochDurationError)
+      Error.captureStackTrace(this, ChallengeAlreadyJoinedError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1770, () => new InvalidEpochDurationError())
+createErrorFromCodeLookup.set(0x1770, () => new ChallengeAlreadyJoinedError())
 createErrorFromNameLookup.set(
-  'InvalidEpochDuration',
-  () => new InvalidEpochDurationError()
+  'ChallengeAlreadyJoined',
+  () => new ChallengeAlreadyJoinedError()
 )
 
 /**
- * InvalidEpochIndex: 'Invalid Epoch Index'
+ * CannotJoinYourOwnChallenge: 'You cannot join your own challenge.'
  *
  * @category Errors
  * @category generated
  */
-export class InvalidEpochIndexError extends Error {
+export class CannotJoinYourOwnChallengeError extends Error {
   readonly code: number = 0x1771
-  readonly name: string = 'InvalidEpochIndex'
+  readonly name: string = 'CannotJoinYourOwnChallenge'
   constructor() {
-    super('Invalid Epoch Index')
+    super('You cannot join your own challenge.')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidEpochIndexError)
+      Error.captureStackTrace(this, CannotJoinYourOwnChallengeError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1771, () => new InvalidEpochIndexError())
+createErrorFromCodeLookup.set(
+  0x1771,
+  () => new CannotJoinYourOwnChallengeError()
+)
 createErrorFromNameLookup.set(
-  'InvalidEpochIndex',
-  () => new InvalidEpochIndexError()
+  'CannotJoinYourOwnChallenge',
+  () => new CannotJoinYourOwnChallengeError()
 )
 
 /**
- * InvalidWitness: 'Invalid Witness'
+ * WagerAlreadySettled: 'The wager has already been settled.'
  *
  * @category Errors
  * @category generated
  */
-export class InvalidWitnessError extends Error {
+export class WagerAlreadySettledError extends Error {
   readonly code: number = 0x1772
-  readonly name: string = 'InvalidWitness'
+  readonly name: string = 'WagerAlreadySettled'
   constructor() {
-    super('Invalid Witness')
+    super('The wager has already been settled.')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidWitnessError)
+      Error.captureStackTrace(this, WagerAlreadySettledError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1772, () => new InvalidWitnessError())
-createErrorFromNameLookup.set('InvalidWitness', () => new InvalidWitnessError())
+createErrorFromCodeLookup.set(0x1772, () => new WagerAlreadySettledError())
+createErrorFromNameLookup.set(
+  'WagerAlreadySettled',
+  () => new WagerAlreadySettledError()
+)
 
 /**
- * Unauthorized: 'Unauthorized address'
+ * IncorrectWagerAmount: 'The wager amount is incorrect.'
  *
  * @category Errors
  * @category generated
  */
-export class UnauthorizedError extends Error {
+export class IncorrectWagerAmountError extends Error {
   readonly code: number = 0x1773
-  readonly name: string = 'Unauthorized'
+  readonly name: string = 'IncorrectWagerAmount'
   constructor() {
-    super('Unauthorized address')
+    super('The wager amount is incorrect.')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, UnauthorizedError)
+      Error.captureStackTrace(this, IncorrectWagerAmountError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1773, () => new UnauthorizedError())
-createErrorFromNameLookup.set('Unauthorized', () => new UnauthorizedError())
+createErrorFromCodeLookup.set(0x1773, () => new IncorrectWagerAmountError())
+createErrorFromNameLookup.set(
+  'IncorrectWagerAmount',
+  () => new IncorrectWagerAmountError()
+)
 
 /**
- * HostTooLong: 'Host length exceeds limit'
+ * ThirdPersonWinner: 'Winner is neither creator nor opponent.'
  *
  * @category Errors
  * @category generated
  */
-export class HostTooLongError extends Error {
+export class ThirdPersonWinnerError extends Error {
   readonly code: number = 0x1774
-  readonly name: string = 'HostTooLong'
+  readonly name: string = 'ThirdPersonWinner'
   constructor() {
-    super('Host length exceeds limit')
+    super('Winner is neither creator nor opponent.')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, HostTooLongError)
+      Error.captureStackTrace(this, ThirdPersonWinnerError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1774, () => new HostTooLongError())
-createErrorFromNameLookup.set('HostTooLong', () => new HostTooLongError())
+createErrorFromCodeLookup.set(0x1774, () => new ThirdPersonWinnerError())
+createErrorFromNameLookup.set(
+  'ThirdPersonWinner',
+  () => new ThirdPersonWinnerError()
+)
 
 /**
- * ProviderTooLong: 'Provider length exceeds limit'
+ * MissingAccounts: 'Missing accounts in remaining_accounts'
  *
  * @category Errors
  * @category generated
  */
-export class ProviderTooLongError extends Error {
+export class MissingAccountsError extends Error {
   readonly code: number = 0x1775
-  readonly name: string = 'ProviderTooLong'
+  readonly name: string = 'MissingAccounts'
   constructor() {
-    super('Provider length exceeds limit')
+    super('Missing accounts in remaining_accounts')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, ProviderTooLongError)
+      Error.captureStackTrace(this, MissingAccountsError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1775, () => new ProviderTooLongError())
+createErrorFromCodeLookup.set(0x1775, () => new MissingAccountsError())
 createErrorFromNameLookup.set(
-  'ProviderTooLong',
-  () => new ProviderTooLongError()
+  'MissingAccounts',
+  () => new MissingAccountsError()
 )
 
 /**
- * InvalidWitnessClaimCount: 'Invalid Witnes Claim count'
+ * WrongOpponent: 'Not the same opponent being passed, while settling'
  *
  * @category Errors
  * @category generated
  */
-export class InvalidWitnessClaimCountError extends Error {
+export class WrongOpponentError extends Error {
   readonly code: number = 0x1776
-  readonly name: string = 'InvalidWitnessClaimCount'
+  readonly name: string = 'WrongOpponent'
   constructor() {
-    super('Invalid Witnes Claim count')
+    super('Not the same opponent being passed, while settling')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidWitnessClaimCountError)
+      Error.captureStackTrace(this, WrongOpponentError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1776, () => new InvalidWitnessClaimCountError())
-createErrorFromNameLookup.set(
-  'InvalidWitnessClaimCount',
-  () => new InvalidWitnessClaimCountError()
-)
+createErrorFromCodeLookup.set(0x1776, () => new WrongOpponentError())
+createErrorFromNameLookup.set('WrongOpponent', () => new WrongOpponentError())
 
 /**
- * EpochAlreadyExists: 'Epoch already exists'
+ * WrongCreator: 'Not the same creator being passed, while settling'
  *
  * @category Errors
  * @category generated
  */
-export class EpochAlreadyExistsError extends Error {
+export class WrongCreatorError extends Error {
   readonly code: number = 0x1777
-  readonly name: string = 'EpochAlreadyExists'
+  readonly name: string = 'WrongCreator'
   constructor() {
-    super('Epoch already exists')
+    super('Not the same creator being passed, while settling')
     if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, EpochAlreadyExistsError)
+      Error.captureStackTrace(this, WrongCreatorError)
     }
   }
 }
 
-createErrorFromCodeLookup.set(0x1777, () => new EpochAlreadyExistsError())
-createErrorFromNameLookup.set(
-  'EpochAlreadyExists',
-  () => new EpochAlreadyExistsError()
-)
-
-/**
- * MaxEpochLengthReached: 'Max Epochs reached'
- *
- * @category Errors
- * @category generated
- */
-export class MaxEpochLengthReachedError extends Error {
-  readonly code: number = 0x1778
-  readonly name: string = 'MaxEpochLengthReached'
-  constructor() {
-    super('Max Epochs reached')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, MaxEpochLengthReachedError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x1778, () => new MaxEpochLengthReachedError())
-createErrorFromNameLookup.set(
-  'MaxEpochLengthReached',
-  () => new MaxEpochLengthReachedError()
-)
-
-/**
- * MaxWitnessesReached: 'Max Witnesses reached'
- *
- * @category Errors
- * @category generated
- */
-export class MaxWitnessesReachedError extends Error {
-  readonly code: number = 0x1779
-  readonly name: string = 'MaxWitnessesReached'
-  constructor() {
-    super('Max Witnesses reached')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, MaxWitnessesReachedError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x1779, () => new MaxWitnessesReachedError())
-createErrorFromNameLookup.set(
-  'MaxWitnessesReached',
-  () => new MaxWitnessesReachedError()
-)
-
-/**
- * MemberAlreadyExists: 'Member already exists'
- *
- * @category Errors
- * @category generated
- */
-export class MemberAlreadyExistsError extends Error {
-  readonly code: number = 0x177a
-  readonly name: string = 'MemberAlreadyExists'
-  constructor() {
-    super('Member already exists')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, MemberAlreadyExistsError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x177a, () => new MemberAlreadyExistsError())
-createErrorFromNameLookup.set(
-  'MemberAlreadyExists',
-  () => new MemberAlreadyExistsError()
-)
-
-/**
- * MaxMembersReached: 'Max Members reached'
- *
- * @category Errors
- * @category generated
- */
-export class MaxMembersReachedError extends Error {
-  readonly code: number = 0x177b
-  readonly name: string = 'MaxMembersReached'
-  constructor() {
-    super('Max Members reached')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, MaxMembersReachedError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x177b, () => new MaxMembersReachedError())
-createErrorFromNameLookup.set(
-  'MaxMembersReached',
-  () => new MaxMembersReachedError()
-)
-
-/**
- * InvalidIdentifier: 'Invalid Identifier'
- *
- * @category Errors
- * @category generated
- */
-export class InvalidIdentifierError extends Error {
-  readonly code: number = 0x177c
-  readonly name: string = 'InvalidIdentifier'
-  constructor() {
-    super('Invalid Identifier')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidIdentifierError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x177c, () => new InvalidIdentifierError())
-createErrorFromNameLookup.set(
-  'InvalidIdentifier',
-  () => new InvalidIdentifierError()
-)
-
-/**
- * InvalidWitnessSignature: 'Invalid Witness Signature'
- *
- * @category Errors
- * @category generated
- */
-export class InvalidWitnessSignatureError extends Error {
-  readonly code: number = 0x177d
-  readonly name: string = 'InvalidWitnessSignature'
-  constructor() {
-    super('Invalid Witness Signature')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, InvalidWitnessSignatureError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x177d, () => new InvalidWitnessSignatureError())
-createErrorFromNameLookup.set(
-  'InvalidWitnessSignature',
-  () => new InvalidWitnessSignatureError()
-)
-
-/**
- * ArithmeticPanic: 'Arithmetic Error'
- *
- * @category Errors
- * @category generated
- */
-export class ArithmeticPanicError extends Error {
-  readonly code: number = 0x177e
-  readonly name: string = 'ArithmeticPanic'
-  constructor() {
-    super('Arithmetic Error')
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(this, ArithmeticPanicError)
-    }
-  }
-}
-
-createErrorFromCodeLookup.set(0x177e, () => new ArithmeticPanicError())
-createErrorFromNameLookup.set(
-  'ArithmeticPanic',
-  () => new ArithmeticPanicError()
-)
+createErrorFromCodeLookup.set(0x1777, () => new WrongCreatorError())
+createErrorFromNameLookup.set('WrongCreator', () => new WrongCreatorError())
 
 /**
  * Attempts to resolve a custom program error from the provided error code.

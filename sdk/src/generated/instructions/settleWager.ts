@@ -6,9 +6,9 @@
  */
 
 import * as splToken from '@solana/spl-token'
-import * as web3 from '@solana/web3.js'
 import * as beet from '@metaplex-foundation/beet'
-import * as beetSolana from '@metaplex-foundation/beet-solana'
+import * as web3 from '@solana/web3.js'
+import { VerifyProofArgs, verifyProofArgsBeet } from '../types/VerifyProofArgs'
 
 /**
  * @category Instructions
@@ -16,8 +16,8 @@ import * as beetSolana from '@metaplex-foundation/beet-solana'
  * @category generated
  */
 export type SettleWagerInstructionArgs = {
-  winner: beet.COption<web3.PublicKey>
   challengeId: string
+  args: VerifyProofArgs
 }
 /**
  * @category Instructions
@@ -31,8 +31,8 @@ export const settleWagerStruct = new beet.FixableBeetArgsStruct<
 >(
   [
     ['instructionDiscriminator', beet.uniformFixedSizeArray(beet.u8, 8)],
-    ['winner', beet.coption(beetSolana.publicKey)],
     ['challengeId', beet.utf8String],
+    ['args', verifyProofArgsBeet],
   ],
   'SettleWagerInstructionArgs'
 )
@@ -47,6 +47,8 @@ export const settleWagerStruct = new beet.FixableBeetArgsStruct<
  * @property [_writable_] opponentTokenAccount
  * @property [_writable_] creatorTokenAccount
  * @property [_writable_] programTokenAccount
+ * @property [] epoch
+ * @property [] epochConfig
  * @property [] associatedTokenProgram
  * @category Instructions
  * @category SettleWager
@@ -61,6 +63,8 @@ export type SettleWagerInstructionAccounts = {
   opponentTokenAccount: web3.PublicKey
   creatorTokenAccount: web3.PublicKey
   programTokenAccount: web3.PublicKey
+  epoch: web3.PublicKey
+  epochConfig: web3.PublicKey
   associatedTokenProgram: web3.PublicKey
   tokenProgram?: web3.PublicKey
   systemProgram?: web3.PublicKey
@@ -129,6 +133,16 @@ export function createSettleWagerInstruction(
     {
       pubkey: accounts.programTokenAccount,
       isWritable: true,
+      isSigner: false,
+    },
+    {
+      pubkey: accounts.epoch,
+      isWritable: false,
+      isSigner: false,
+    },
+    {
+      pubkey: accounts.epochConfig,
+      isWritable: false,
       isSigner: false,
     },
     {

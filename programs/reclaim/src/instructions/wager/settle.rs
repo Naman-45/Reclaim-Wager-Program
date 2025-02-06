@@ -85,14 +85,6 @@ pub struct Settle<'info> {
     )]
     pub epoch_config: Account<'info, EpochConfig>,
 
-    // #[account(
-    //     constraint = (
-    //         signer.key().eq(&args.claim_info.context_address) || 
-    //         signer.key() == signer.to_account_info().key(),
-    //     ) @ ReclaimError::Unauthorized
-    // )]
-    // pub verify_signer: Signer<'info>,
-
     pub associated_token_program: Program<'info, AssociatedToken>,
     pub token_program: Interface<'info, TokenInterface>,
     pub system_program: Program<'info, System>
@@ -148,9 +140,6 @@ pub fn settle_challenge_and_verify_proof(ctx: Context<Settle>, challenge_id: Str
         );
     }
 
-    // Extract match results
-    // let game_result = extract_game_result(&args.claim_info.parameters)?;
-
     let json_data = parse_large_json(&args.claim_info.parameters);
 
     // Extract player results from JSON
@@ -162,12 +151,6 @@ pub fn settle_challenge_and_verify_proof(ctx: Context<Settle>, challenge_id: Str
         (Some(_wr), Some(br)) if br.contains("\"result\":\"win\"") => Some(challenge.opponent.unwrap()),
         _ => None, // Draw case
     };
-
-    // let winner = match game_result {
-    //     GameOutcome::Winner(winner_pubkey) => Some(winner_pubkey),
-    //     GameOutcome::Draw => None,
-    // };
-    
 
     if let Some(winner_pubkey) = winner {
         require!(

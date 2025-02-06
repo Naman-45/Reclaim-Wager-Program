@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{token_interface::{ Mint, TokenAccount, transfer_checked, TransferChecked, TokenInterface }, associated_token::AssociatedToken};
 
-use crate::{state::Challenge, error::WagerError};
+use crate::{constants::SEED_CHALLENGE, error::WagerError, state::Challenge};
 
 #[derive(Accounts)]
 #[instruction(challenge_id: String)]
@@ -11,7 +11,7 @@ pub struct JoinChallenge<'info> {
 
     #[account(
         mut,
-        seeds = [b"challenge", challenge_id.as_bytes()],
+        seeds = [SEED_CHALLENGE, challenge_id.as_bytes()],
         bump = challenge.challenge_bump
     )]
     pub challenge: Account<'info, Challenge>,
@@ -66,7 +66,7 @@ pub fn join_challenge(ctx: Context<JoinChallenge>, _challenge_id: String, wager_
             from: accounts.opponent_token_account.to_account_info(),
             mint: accounts.token_mint.to_account_info(),
             to: accounts.program_token_account.to_account_info(),
-            authority: accounts.opponent_token_account.to_account_info()
+            authority: accounts.opponent.to_account_info()
         };
 
 

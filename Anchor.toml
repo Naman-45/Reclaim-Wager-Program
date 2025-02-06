@@ -1,12 +1,12 @@
 [toolchain]
-anchor_version = "0.29.0"
+anchor_version = "0.30.1"
 
 [features]
 resolution = true
 skip-lint = false
 
 [programs.devnet]
-reclaim = "CGTjkfCkFqEPhp28aBK6afd2SaqeVTju1pdYZzdrX3dn"
+reclaim = "EopRkEakcNd3kC7SZZKXqAHFx1ysXwcAsDW2ABhKAGpN"
 
 [registry]
 url = "https://api.apr.dev"
